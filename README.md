@@ -1,29 +1,20 @@
-# tao-web
+# 医家家康后台管理系统
 
 ## Project setup
-```
-yarn install
-```
 
-### Compiles and hot-reloads for development
-```
+
+## 开发
+
+```shell
+yarn install
 yarn run serve
 ```
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+## 相关 URL
 
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- [线上测试环境]()
+- [项目 git](）
+- [后端项目 git]()
+- [Api 文档](http://a283d30696.qicp.vip/)
+- [Vue Cli 配置](https://cli.vuejs.org/config/)
+- [Git Emoji 🐶](https://github.com/liuchengxu/git-commit-emoji-cn)
