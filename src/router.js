@@ -6,6 +6,9 @@ import Login from './pages/Login'
 import HeaderAsideLayout from './components/layouts/HeaderAsideLayout'
 import UserManager from './pages/UserManager/UserManager'
 import StationsManager from './pages/StationsManager/StationsManager'
+import DeviceManager from './pages/DeviceManager/DeviceManager'
+import PayManager from './pages/PayManager/PayManager'
+
 import NotFound from './pages/NotFound'
 
 Vue.use(Router)
@@ -18,23 +21,29 @@ const router = new Router({
     },
     {
       path: '/',
-      redirect: '/user',
+      redirect: '/login',
       component: HeaderAsideLayout,
       children: [
         {
           path: '/user',
           name: 'UserManager',
           component: UserManager
-        }, {
+        },
+        {
           path: '/stations',
           name: 'StationsManager',
           component: StationsManager
         },
-        // {
-        //   path: '/device',
-        //   name: 'DeviceManager',
-        //   component: DeviceManager
-        // },
+        {
+          path: '/device',
+          name: 'DeviceManager',
+          component: DeviceManager
+        },
+        {
+          path: '/payment',
+          name: 'PayManager',
+          component: PayManager
+        }
       ]
     },
     {

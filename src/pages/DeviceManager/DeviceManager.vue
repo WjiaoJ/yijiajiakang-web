@@ -1,13 +1,15 @@
-<style lang="scss" scoped>
-.user-list {
-  .app-dialog {
-    width: 500px;
+<style lang="scss" >
+.device-list {
+  .app-dialog__wrapper {
+    .app-dialog {
+      width: 700px;
+    }
   }
 }
 </style>
 
 <template>
-  <div class="app-card manager-page department-manager-page user-list" v-loading="loading">
+  <div class="app-card manager-page department-manager-page device-list" v-loading="loading">
     <AddOrUpdateItem
       v-if="openCardMode"
       @close="closeDialog"
@@ -18,13 +20,8 @@
       <div class="manager-page-tool-bar-search">
         <div class="manager-page-tool-bar-input-container">
           <el-form :model="form" :inline="true" ref="form" size="small" label-width="150px">
-            <el-form-item label="场站名称或场站号" prop="groupId">
-              <el-input
-                v-model="form.groupId"
-                style="width:200px;"
-                clearable
-                placeholder="请输入场站名称或场站号"
-              ></el-input>
+            <el-form-item label="设备号" prop="imei">
+              <el-input v-model="form.imei" style="width:200px;" clearable placeholder="请输入设备号"></el-input>
             </el-form-item>
           </el-form>
         </div>
@@ -47,11 +44,17 @@
             <el-link @click="viewItem(scope.row)" :underline="false" icon="el-icon-view">详情</el-link>
           </template>
         </el-table-column>
-        <el-table-column label="场站号" prop="groupid"></el-table-column>
+        <el-table-column label="设备号" prop="id"></el-table-column>
+        <el-table-column label="设备名称" prop="devicename"></el-table-column>
+        <el-table-column label="设备类型">
+          <template slot-scope="props">{{props.row.type == '1' ? '轮椅': '陪护床' }}</template>
+        </el-table-column>
+        <el-table-column label="场站id" prop="groupid"></el-table-column>
         <el-table-column label="场站名称" prop="groupname"></el-table-column>
-        <el-table-column label="地址" prop="grouppos"></el-table-column>
-        <el-table-column label="负责人" prop="charge_man"></el-table-column>
-        <el-table-column label="负责人手机号" prop="charge_phone"></el-table-column>
+        <el-table-column label="设备地址" prop="devicepos"></el-table-column>
+        <el-table-column label="设备状态">
+          <template slot-scope="props">{{props.row.status == '0' ? '在线': '离线' }}</template>
+        </el-table-column>
       </el-table>
     </div>
     <div class="manager-page-pagination-container">
@@ -72,6 +75,7 @@
 import * as api from '../../common/api'
 import AddOrUpdateItem from './AddOrUpdateItem'
 import { ManagerPageMixin } from '../../common/vue-mixin'
+import store from '../../store'
 
 export default {
   mixins: [ManagerPageMixin],
@@ -81,17 +85,17 @@ export default {
   data() {
     return {
       form: {
-        groupId: ''
+        imei: ''
       }
     }
   },
   async mounted() {
-    this.setApi(api.getStations)
+    this.setApi(api.getDevice)
     this.updateTableData()
   },
   methods: {
     isDelete(item) {
-      this.deleteItem(item, api.deleteStations)
+      this.deleteItem(item, api.deleteDevice)
     }
   }
 }

@@ -127,50 +127,33 @@ export default {
           icon: 'el-icon-s-management'
         },
         {
-          path: '/device/repair',
-          name: '报修管理',
+          path: '/device',
+          name: '设备管理',
           icon: 'el-icon-magic-stick'
         },
         {
           adminOnly: true,
-          path: '/device/upkeep',
-          name: '保养管理',
+          path: '/payment',
+          name: '缴费管理',
           icon: 'el-icon-document'
         },
         {
-          path: '/reportForms',
-          name: '报表',
-          icon: 'el-icon-s-data'
+          adminOnly: true,
+          path: '/use',
+          name: '使用管理',
+          icon: 'el-icon-edit-outline'
+        },
+        {
+          adminOnly: true,
+          path: '/history',
+          name: '历史管理',
+          icon: 'el-icon-data-analysis'
         }
+        // ,
         // {
-        //   UnOperation: true,
-        //   path: '/manager',
-        //   name: '基础管理',
-        //   icon: 'el-icon-s-tools',
-        //   children: [
-        //     {
-        //       adminOnly: true,
-        //       path: '/customer',
-        //       name: '客户管理'
-        //     },
-        //     {
-        //       path: '/user',
-        //       name: '用户管理'
-        //     },
-        //     {
-        //       path: '/device',
-        //       name: '设备管理'
-        //     },
-        //     {
-        //       adminOnly: true,
-        //       path: '/deviceRule',
-        //       name: '规则管理'
-        //     },
-        //     {
-        //       path: '/gateway',
-        //       name: '网关管理'
-        //     }
-        //   ]
+        //   path: '/reportForms',
+        //   name: '报表',
+        //   icon: 'el-icon-s-data'
         // }
       ]
     }

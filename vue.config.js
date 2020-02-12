@@ -4,7 +4,7 @@ module.exports = {
     // https: true,
     proxy: {
       '/api': {
-        target: 'http://a283d30696.qicp.vip',
+        target: 'http://29n1t43158.wicp.vip',
         changeOrigin: true
       }
     }

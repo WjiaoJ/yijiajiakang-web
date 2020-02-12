@@ -37,21 +37,39 @@
     </div>
     <div class="manager-page-table-container" ref="tableContainer">
       <el-table :height="tableHeight" :data="tableData" style="width: 100%;" highlight-current-row>
-        <el-table-column label="操作" align="center" width="200px">
-          <template slot-scope="scope">
-            <el-link @click="editItem(scope.row)" :underline="false" icon="el-icon-edit">编辑</el-link>
+        <el-table-column label="序号" align="center" prop="order" width="80px"></el-table-column>
+        <el-table-column label="操作" align="center" width="280px">
+          <template slot-scope="scope" disabled>
+            <el-link
+              :disabled="scope.row.rolenum == '0'"
+              @click="editItem(scope.row)"
+              :underline="false"
+              icon="el-icon-edit"
+            >编辑</el-link>
             <span style="display:inline-block;width:10px"></span>
-            <el-link @click="isDelete(scope.row)" :underline="false" icon="el-icon-delete">删除</el-link>
+            <el-link
+              :disabled="scope.row.rolenum == '0'"
+              @click="resetPass(scope.row)"
+              :underline="false"
+              icon="el-icon-refresh"
+            >重置密码</el-link>
+            <span style="display:inline-block;width:10px"></span>
+            <el-link
+              :disabled="scope.row.rolenum == '0'"
+              @click="isDelete(scope.row)"
+              :underline="false"
+              icon="el-icon-delete"
+            >删除</el-link>
             <span style="display:inline-block;width:10px"></span>
             <el-link @click="viewItem(scope.row)" :underline="false" icon="el-icon-view">详情</el-link>
           </template>
         </el-table-column>
+
         <el-table-column label="用户名称" prop="username"></el-table-column>
-        <el-table-column label="用户id" prop="id"></el-table-column>
-        <el-table-column label="真实姓名" prop="fullName"></el-table-column>
-        <el-table-column label="手机号" prop="phone"></el-table-column>
+        <el-table-column label="真实姓名" prop="fullname"></el-table-column>
+        <el-table-column label="手机号" prop="phonenum"></el-table-column>
         <el-table-column label="用户类型">
-          <template slot-scope="props">{{props.row.role == '0' ? '超级管理员': '普通用户' }}</template>
+          <template slot-scope="props">{{props.row.rolenum == '0' ? '超级管理员': '普通用户' }}</template>
         </el-table-column>
       </el-table>
     </div>
@@ -94,6 +112,27 @@ export default {
   methods: {
     isDelete(item) {
       this.deleteItem(item, api.deleteUser)
+    },
+    resetPass(row) {
+      this.$confirm('确定重置 ' + row.username + ' 的密码' + '?', '重置密码', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+        .then(async () => {
+          const body = new FormData()
+
+          body.append('id', row.id)
+          body.append('updateType', 2)
+          body.append('password', row.password)
+
+          await api.modifyPassword(body)
+          this.$message({
+            type: 'success',
+            message: '重置成功'
+          })
+        })
+        .catch(() => {})
     }
   }
 }

@@ -86,11 +86,17 @@ export default {
       }
       this.loading = true
       this.errorMsg = null
+      const body = new FormData()
+
+      body.append('username', this.username)
+      body.append('password', this.password)
       api
-        .login({ username: this.username, password: this.password })
+        .login(body)
         .then(res => {
           store.commit('setUserInfo', res.data)
-          this.$router.replace({ path: '/' })
+          console.log(res.data)
+
+          this.$router.replace({ path: '/user' })
         })
         .finally(() => {
           this.loading = false

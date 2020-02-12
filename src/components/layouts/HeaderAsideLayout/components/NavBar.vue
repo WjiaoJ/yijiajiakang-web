@@ -157,9 +157,13 @@ export default {
       this.loading = true
       try {
         await this.$refs[formName].validate()
-        await api.modifyPassword(this.userInfo.id, {
-          newPassword: this.ruleForm.pass
-        })
+        const body = new FormData()
+
+        body.append('id', this.userInfo.id)
+        body.append('updateType', 1)
+        body.append('password', this.ruleForm.pass)
+
+        await api.modifyPassword(body)
         this.$message({
           type: 'success',
           message: '修改成功'

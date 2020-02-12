@@ -28,9 +28,7 @@ export default new Vuex.Store({
       if (typeof state.userInfo != 'object') {
         state.userInfo = JSON.parse(localStorage.userInfo)
       }
-      console.log(state.userInfo);
-
-      return state.userInfo.role === '0'
+      return state.userInfo.rolenum == '0'
     }
   },
   mutations: {

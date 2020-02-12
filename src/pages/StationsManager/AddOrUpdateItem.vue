@@ -1,43 +1,30 @@
 <template>
-  <AppDialog :title="isReadOnly?'用户详情':(data?'编辑':'新建')+'用户'">
-    <el-form :model="form" :rules="formRules" :disabled="isReadOnly" ref="form" label-width="100px">
+  <AppDialog :title="isReadOnly?'场站详情':(data?'编辑':'新建')+'场站'">
+    <el-form :model="form" :rules="formRules" :disabled="isReadOnly" ref="form" label-width="120px">
       <el-row>
         <el-col :span="24">
-          <el-form-item prop="username" label="用户名称">
-            <el-input :disabled="!!data" v-model="form.username" autocomplete="off"></el-input>
+          <el-form-item prop="groupid" label="场站号">
+            <el-input :disabled="!!data" clearable v-model="form.groupid"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="24">
-          <el-form-item prop="password" label="密码">
-            <el-input v-model="form.password" autocomplete="off"></el-input>
+          <el-form-item prop="groupname" label="场站名称">
+            <el-input clearable v-model="form.groupname"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="24">
-          <el-form-item prop="fullName" label="真实姓名">
-            <el-input v-model="form.fullName" autocomplete="off"></el-input>
+          <el-form-item prop="grouppos" label="地址">
+            <el-input clearable v-model="form.grouppos"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="24">
-          <el-form-item prop="phone" label="手机号">
-            <el-input v-model="form.phone" autocomplete="off"></el-input>
+          <el-form-item prop="charge_man" label="负责人">
+            <el-input clearable v-model="form.charge_man"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="24">
-          <el-form-item prop="role" label="用户类型">
-            <el-select
-              v-model="form.role"
-              :focus="false"
-              clearable
-              placeholder="请选择"
-              style="width:100%"
-            >
-              <el-option
-                v-for="item in userTypeAll"
-                :key="item.typeName"
-                :label="item.typeName"
-                :value="item.typeValue"
-              ></el-option>
-            </el-select>
+          <el-form-item prop="charge_phone" label="负责人手机号">
+            <el-input clearable v-model="form.charge_phone"></el-input>
           </el-form-item>
         </el-col>
       </el-row>
@@ -70,22 +57,12 @@ export default {
       loading: false,
       form: {
         id: null,
-        username: '',
-        password: '',
-        role: '',
-        fullName: '',
-        phone: ''
-      },
-      userTypeAll: [
-        {
-          typeName: '超级管理员',
-          typeValue: '0'
-        },
-        {
-          typeName: '普通用户',
-          typeValue: '1'
-        }
-      ]
+        groupid: '',
+        groupname: '',
+        grouppos: '',
+        charge_man: '',
+        charge_phone: ''
+      }
     }
   },
   computed: {
@@ -101,11 +78,11 @@ export default {
   beforeMount() {
     const required = rules.required()
     this.formRules = {
-      username: [required],
-      password: this.data ? [] : [required],
-      role: [required],
-      fullName: [required],
-      phone: [required]
+      groupid: [required],
+      groupname: [required],
+      grouppos: [required],
+      charge_man: [required],
+      charge_phone: [required, rules.phoneFormat()]
     }
   },
   methods: {
@@ -118,10 +95,10 @@ export default {
         }
 
         if (this.data) {
-          await api.updateUser(postBody)
+          await api.updateStations(postBody)
           this.$emit('close', 'update')
         } else {
-          await api.addUser(postBody)
+          await api.addStations(postBody)
           this.$emit('close', 'add')
         }
       } catch (e) {

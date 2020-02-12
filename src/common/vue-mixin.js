@@ -8,7 +8,7 @@ export const ManagerPageMixin = {
       updateItem: null,
       pagination: {
         page: 1,
-        rows: 20,
+        rows: 10,
         sizeList: [10, 20, 30, 40, 50],
         total: 0
       }
@@ -37,8 +37,13 @@ export const ManagerPageMixin = {
       const params = this.genRequestParams()
       this._api(params)
         .then(res => {
-          this.tableData = res.data.items
-          this.pagination.total = res.data.total
+          console.log(res.data.content)
+
+          this.tableData = res.data.content.map((item, index) => ({
+            ...item,
+            order: index + 1 + (this.pagination.page - 1) * this.pagination.rows
+          }))
+          this.pagination.total = res.data.totalElements
         })
         .finally(() => {
           this.loading = false
@@ -79,7 +84,7 @@ export const ManagerPageMixin = {
           await api(item)
           this.updateTableData()
         })
-        .catch(() => { })
+        .catch(() => {})
     },
     cancelItem(item, api) {
       this.$confirm('此操作将取消修复该设备, 是否继续?', '提示', {
@@ -91,7 +96,7 @@ export const ManagerPageMixin = {
           await api(item)
           this.updateTableData()
         })
-        .catch(() => { })
+        .catch(() => {})
     },
     viewItem(item) {
       this.openCardMode = 'view'

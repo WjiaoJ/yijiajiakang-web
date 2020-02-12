@@ -117,3 +117,15 @@ export const latitudeFormat = () => ({
   },
   trigger: ['change', 'blur']
 })
+
+export const phoneFormat = () => ({
+  validator: (rule, value, callback) => {
+    let err
+    const reg = /^1[3456789]\d{9}$/
+    if (value !== '' && value !== null && !reg.test(value)) {
+      err = `请输入正确的11位手机号`
+    }
+    handleCb(callback, err)
+  },
+  trigger: ['change', 'blur']
+})

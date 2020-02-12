@@ -4,40 +4,22 @@
       <el-row>
         <el-col :span="24">
           <el-form-item prop="username" label="用户名称">
-            <el-input :disabled="!!data" v-model="form.username" autocomplete="off"></el-input>
+            <el-input :disabled="!!data" v-model="form.username" clearable autocomplete="off"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="24">
+        <el-col :span="24" v-if="!data">
           <el-form-item prop="password" label="密码">
-            <el-input v-model="form.password" autocomplete="off"></el-input>
+            <el-input :disabled="!!data" v-model="form.password" clearable autocomplete="off"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="24">
-          <el-form-item prop="fullName" label="真实姓名">
-            <el-input v-model="form.fullName" autocomplete="off"></el-input>
+          <el-form-item prop="fullname" label="真实姓名">
+            <el-input v-model="form.fullname" clearable autocomplete="off"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="24">
-          <el-form-item prop="phone" label="手机号">
-            <el-input v-model="form.phone" autocomplete="off"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="24">
-          <el-form-item prop="role" label="用户类型">
-            <el-select
-              v-model="form.role"
-              :focus="false"
-              clearable
-              placeholder="请选择"
-              style="width:100%"
-            >
-              <el-option
-                v-for="item in userTypeAll"
-                :key="item.typeName"
-                :label="item.typeName"
-                :value="item.typeValue"
-              ></el-option>
-            </el-select>
+          <el-form-item prop="phonenum" label="手机号">
+            <el-input v-model="form.phonenum" clearable autocomplete="off"></el-input>
           </el-form-item>
         </el-col>
       </el-row>
@@ -72,20 +54,9 @@ export default {
         id: null,
         username: '',
         password: '',
-        role: '',
-        fullName: '',
-        phone: ''
-      },
-      userTypeAll: [
-        {
-          typeName: '超级管理员',
-          typeValue: '0'
-        },
-        {
-          typeName: '普通用户',
-          typeValue: '1'
-        }
-      ]
+        fullname: '',
+        phonenum: ''
+      }
     }
   },
   computed: {
@@ -103,9 +74,8 @@ export default {
     this.formRules = {
       username: [required],
       password: this.data ? [] : [required],
-      role: [required],
-      fullName: [required],
-      phone: [required]
+      fullname: [required],
+      phonenum: [required, rules.phoneFormat()]
     }
   },
   methods: {

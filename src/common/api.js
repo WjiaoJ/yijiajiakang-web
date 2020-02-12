@@ -2,9 +2,7 @@ import axios from 'axios'
 import { Notification } from 'element-ui'
 import { AuthToken, toQueryStr } from './utils'
 
-const http = axios.create({ baseURL: 'http://a283d30696.qicp.vip/api/' })
-
-
+const http = axios.create({ baseURL: 'http://29n1t43158.wicp.vip/' })
 
 const nitifyErr = err => {
   Notification({
@@ -33,7 +31,7 @@ http.interceptors.response.use(
     }
     if (res.data.success || res.data.connectionString) return res.data
     else {
-      nitifyErr(res.data.message)
+      nitifyErr(res.data.msg)
       throw res.data.success
     }
   },
@@ -48,37 +46,55 @@ http.interceptors.response.use(
   }
 )
 
-export const login = body =>
-  http.post(`auth/login`, body)
+export const login = body => http.post(`/user/in/gxly/user/v3.0/login`, body)
 
-export const modifyPassword = (id, pass) => http.put(`common/${id}`, pass)
+export const modifyPassword = data =>
+  http.put(`/user/in/gxly/user/v3.0/user/password`, data)
 
 // 用户管理
-export const getUsers = params => http.get(`user/list?${toQueryStr(params)}`)
+export const getUsers = params =>
+  http.get(`/user/in/gxly/user/v3.0/user/info?${toQueryStr(params)}`)
 
-export const addUser = data => http.post(`user/register`, data)
+export const addUser = data => http.post(`/user/in/gxly/user/v3.0/save`, data)
 
-export const updateUser = data => http.put(`user/update`, data)
+export const updateUser = data =>
+  http.put(`/user/in/gxly/user/v3.0/user/update`, data)
 
-export const deleteUser = data => http.delete(`user/delete/${data.id}`)
+export const deleteUser = data =>
+  http.delete(`/user/in/gxly/user/v3.0/user/${data.id}`)
+
+// 场站管理
+export const getStations = params =>
+  http.get(`/device/in/gxly/device/v3.0/group/info?${toQueryStr(params)}`)
+
+export const addStations = data =>
+  http.post(`/device/in/gxly/device/v3.0/group/save`, data)
+
+export const updateStations = data =>
+  http.put(`/device/in/gxly/device/v3.0/group/update`, data)
+
+export const deleteStations = data =>
+  http.delete(`/device/in/gxly/device/v3.0/group/${data.id}`)
 
 // 设备管理
-export const getDevice = params => http.get(`device/?${toQueryStr(params)}`)
+export const getDevice = params =>
+  http.get(`/device/in/gxly/device/v3.0/device/info?${toQueryStr(params)}`)
 
-export const addDevice = data => http.post(`device/`, data)
+export const getStationsName = id =>
+  http.get(`/device/in/gxly/device/v3.0/group/imei?userId=${id}`)
 
-export const updateDevice = data => http.put(`device/${data.id}`, data)
+export const addDevice = data =>
+  http.post(`/device/in/gxly/device/v3.0/device/save`, data)
 
-export const deleteDevice = data => http.delete(`device/${data.id}`)
+export const updateDevice = data =>
+  http.put(`/device/in/gxly/device/v3.0/device/update`, data)
 
+export const deleteDevice = data =>
+  http.delete(`/device/in/gxly/device/v3.0/device/${data.id}`)
 
-// 导出
-export const getReportFormsExport = params =>
-  http.get(`reportForms/export?${toQueryStr(params)}`, { responseType: 'blob' })
+// 缴费管理
+export const getPay = params =>
+  http.get(`/deposit/in/gxly/deposit/v3.0/deposit/info?${toQueryStr(params)}`)
 
-
-
-// 报警
-
-export const getPollingMonitor = () => http.get(`notify/pollingMonitor`)
-
+export const getPayMoney = params =>
+  http.get(`/deposit/in/gxly/deposit/v3.0/deposit/money?${toQueryStr(params)}`)
