@@ -48,7 +48,7 @@
     </div>
     <div class="manager-page-table-container" ref="tableContainer">
       <el-table :height="tableHeight" :data="tableData" style="width: 100%;" highlight-current-row>
-        <el-table-column label="序号" align="center" prop="order" width="80px"></el-table-column>
+        <!--  <el-table-column label="序号" align="center" prop="order" width="80px"></el-table-column>
         <el-table-column label="操作" align="center" width="200px">
           <template slot-scope="scope">
             <el-link @click="editItem(scope.row)" :underline="false" icon="el-icon-edit">编辑</el-link>
@@ -68,7 +68,7 @@
         <el-table-column label="设备地址" prop="devicepos"></el-table-column>
         <el-table-column label="设备状态">
           <template slot-scope="props">{{props.row.status == '0' ? '在线': '离线' }}</template>
-        </el-table-column>
+        </el-table-column>-->
       </el-table>
     </div>
     <div class="manager-page-pagination-container">
@@ -121,7 +121,7 @@ export default {
     this.getTotalAmount()
   },
   async mounted() {
-    this.setApi(api.getDevice)
+    this.setApi(api.getPay)
     this.updateTableData()
   },
   methods: {
