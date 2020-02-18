@@ -9,7 +9,7 @@ export const ManagerPageMixin = {
       pagination: {
         page: 1,
         rows: 10,
-        sizeList: [10, 20, 30, 40, 50],
+        sizeList: [5, 10, 20, 30, 40, 50],
         total: 0
       }
     }
@@ -27,7 +27,7 @@ export const ManagerPageMixin = {
     genRequestParams() {
       return {
         ...this.form,
-        pageNumber: this.pagination.page,
+        page: this.pagination.page,
         rows: this.pagination.rows
       }
     },

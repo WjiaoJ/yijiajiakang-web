@@ -13,8 +13,21 @@
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item prop="unitcount" label="单元数">
-            <el-input v-model="form.unitcount" type="number" clearable autocomplete="off"></el-input>
+          <el-form-item prop="unitcount" label="单元号">
+            <el-select
+              v-model="form.unitcount"
+              :focus="false"
+              clearable
+              placeholder="请选择"
+              style="width:100%"
+            >
+              <el-option
+                v-for="item in [{id:'01'},{id:'02'},{id:'03'},{id:'04'},{id:'05'},{id:'06'},{id:'07'},{id:'08'},{id:'09'},{id:'10'},{id:'11'},{id:'12'},{id:'13'},{id:'14'},{id:'15'},{id:'16'}]"
+                :key="item.id"
+                :label="item.id"
+                :value="item.id"
+              ></el-option>
+            </el-select>
           </el-form-item>
         </el-col>
         <el-col :span="12">

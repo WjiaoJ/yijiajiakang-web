@@ -18,6 +18,11 @@ textarea {
           </el-form-item>
         </el-col>
         <el-col :span="24">
+          <el-form-item prop="imei" label="设备号">
+            <el-input :disabled="!!data" v-model="form.imei" clearable autocomplete="off"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="24">
           <el-form-item prop="reserve" label="备注">
             <el-input v-model="form.reserve" type="textarea" autocomplete="off"></el-input>
           </el-form-item>
@@ -79,10 +84,11 @@ export default {
         await this.$refs.form.validate()
         const body = new FormData()
 
-        body.append('id', this.form.tradeid)
+        body.append('id', this.form.id)
         body.append('reserve', this.form.reserve)
+        body.append('orderPay', 1)
         if (this.data) {
-          await api.updatePay(body)
+          await api.updateDeposit(body)
           this.$emit('close', 'update')
         }
       } catch (e) {

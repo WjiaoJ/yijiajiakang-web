@@ -36,8 +36,36 @@
       <el-button @click="createItem" size="small" type="primary" icon="el-icon-plus">新建</el-button>
     </div>
     <div class="manager-page-table-container" ref="tableContainer">
-      <el-table :height="tableHeight" :data="tableData" style="width: 100%;" highlight-current-row>
+      <el-table
+        :height="tableHeight"
+        :data="tableData"
+        :row-key="getRowKeys"
+        :expand-row-keys="expand"
+        @expand-change="exChange"
+        style="width: 100%;"
+        highlight-current-row
+      >
+        <el-table-column align="center" type="expand">
+          <template slot-scope="props">
+            <el-table
+              :data="props.row.deviceTable?props.row.deviceTable :[] "
+              style="width: 100%;"
+              v-loading="tableLoading"
+              :border="true"
+            >
+              <el-table-column align="center" label="id" prop="id" :resizable="false"></el-table-column>
+              <el-table-column align="center" label="设备名称" prop="deviceid" :resizable="false"></el-table-column>
+              <el-table-column align="center" label="用户名称" prop="username" :resizable="false"></el-table-column>
+            </el-table>
+          </template>
+        </el-table-column>
         <el-table-column label="序号" align="center" prop="order" width="80px"></el-table-column>
+        <el-table-column label="用户名称" prop="username"></el-table-column>
+        <el-table-column label="真实姓名" prop="fullname"></el-table-column>
+        <el-table-column label="手机号" prop="phonenum"></el-table-column>
+        <el-table-column label="用户类型">
+          <template slot-scope="props">{{props.row.rolenum == '0' ? '超级管理员': '普通用户' }}</template>
+        </el-table-column>
         <el-table-column label="操作" align="center" width="280px">
           <template slot-scope="scope" disabled>
             <el-link
@@ -63,13 +91,6 @@
             <span style="display:inline-block;width:10px"></span>
             <el-link @click="viewItem(scope.row)" :underline="false" icon="el-icon-view">详情</el-link>
           </template>
-        </el-table-column>
-
-        <el-table-column label="用户名称" prop="username"></el-table-column>
-        <el-table-column label="真实姓名" prop="fullname"></el-table-column>
-        <el-table-column label="手机号" prop="phonenum"></el-table-column>
-        <el-table-column label="用户类型">
-          <template slot-scope="props">{{props.row.rolenum == '0' ? '超级管理员': '普通用户' }}</template>
         </el-table-column>
       </el-table>
     </div>
@@ -100,9 +121,22 @@ export default {
   },
   data() {
     return {
+      tableLoading: true,
       form: {
         username: ''
+      },
+      expands: []
+    }
+  },
+  computed: {
+    expand() {
+      if (this.expands.length) {
+        const expandTable = this.tableData.filter(
+          item => item.id == this.expands[0]
+        )
+        this.exChange(expandTable[0], expandTable)
       }
+      return this.expands
     }
   },
   async mounted() {
@@ -110,6 +144,34 @@ export default {
     this.updateTableData()
   },
   methods: {
+    getRowKeys: function(row) {
+      return row.id
+    },
+    async exChange(row, rowList) {
+      this.tableLoading = true
+
+      if (!row.deviceTable) {
+        const res = (await api.getUserDevice(row)).data
+
+        this.tableData = this.tableData.map(item => {
+          if (item.id == row.id) {
+            item.deviceTable = res
+          }
+          return item
+        })
+      }
+
+      var that = this
+      if (rowList.length) {
+        that.expands = []
+        if (row) {
+          that.expands.push(row.id)
+        }
+      } else {
+        that.expands = []
+      }
+      this.tableLoading = false
+    },
     isDelete(item) {
       this.deleteItem(item, api.deleteUser)
     },

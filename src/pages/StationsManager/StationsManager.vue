@@ -38,6 +38,11 @@
     <div class="manager-page-table-container" ref="tableContainer">
       <el-table :height="tableHeight" :data="tableData" style="width: 100%;" highlight-current-row>
         <el-table-column label="序号" align="center" prop="order" width="80px"></el-table-column>
+        <el-table-column label="场站号" prop="groupid"></el-table-column>
+        <el-table-column label="场站名称" prop="groupname"></el-table-column>
+        <el-table-column label="地址" prop="grouppos"></el-table-column>
+        <el-table-column label="负责人" prop="charge_man"></el-table-column>
+        <el-table-column label="负责人手机号" prop="charge_phone"></el-table-column>
         <el-table-column label="操作" align="center" width="200px">
           <template slot-scope="scope">
             <el-link @click="editItem(scope.row)" :underline="false" icon="el-icon-edit">编辑</el-link>
@@ -47,11 +52,6 @@
             <el-link @click="viewItem(scope.row)" :underline="false" icon="el-icon-view">详情</el-link>
           </template>
         </el-table-column>
-        <el-table-column label="场站号" prop="groupid"></el-table-column>
-        <el-table-column label="场站名称" prop="groupname"></el-table-column>
-        <el-table-column label="地址" prop="grouppos"></el-table-column>
-        <el-table-column label="负责人" prop="charge_man"></el-table-column>
-        <el-table-column label="负责人手机号" prop="charge_phone"></el-table-column>
       </el-table>
     </div>
     <div class="manager-page-pagination-container">

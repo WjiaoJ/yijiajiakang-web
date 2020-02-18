@@ -8,6 +8,9 @@ import UserManager from './pages/UserManager/UserManager'
 import StationsManager from './pages/StationsManager/StationsManager'
 import DeviceManager from './pages/DeviceManager/DeviceManager'
 import PayManager from './pages/PayManager/PayManager'
+import DepositManager from './pages/DepositManager/DepositManager'
+import UseManager from './pages/UseManager/UseManager'
+import HistoryManager from './pages/HistoryManager/HistoryManager'
 
 import NotFound from './pages/NotFound'
 
@@ -43,6 +46,21 @@ const router = new Router({
           path: '/payment',
           name: 'PayManager',
           component: PayManager
+        },
+        {
+          path: '/deposit',
+          name: 'DepositManager',
+          component: DepositManager
+        },
+        {
+          path: '/use',
+          name: 'UseManager',
+          component: UseManager
+        },
+        {
+          path: '/history',
+          name: 'HistoryManager',
+          component: HistoryManager
         }
       ]
     },

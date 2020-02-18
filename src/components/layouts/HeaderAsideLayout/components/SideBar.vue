@@ -134,27 +134,32 @@ export default {
         {
           adminOnly: true,
           path: '/payment',
-          name: '缴费管理',
+          name: '交费查询',
           icon: 'el-icon-document'
         },
         {
           adminOnly: true,
+          path: '/deposit',
+          name: '押金查询',
+          icon: 'el-icon-tickets'
+        },
+        {
+          adminOnly: true,
           path: '/use',
-          name: '使用管理',
+          name: '使用查询',
           icon: 'el-icon-edit-outline'
         },
         {
           adminOnly: true,
           path: '/history',
-          name: '历史管理',
+          name: '历史查询',
           icon: 'el-icon-data-analysis'
+        },
+        {
+          path: '/device-overview',
+          name: '设备概况',
+          icon: 'el-icon-s-data'
         }
-        // ,
-        // {
-        //   path: '/reportForms',
-        //   name: '报表',
-        //   icon: 'el-icon-s-data'
-        // }
       ]
     }
   },

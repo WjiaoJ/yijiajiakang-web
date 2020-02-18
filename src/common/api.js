@@ -55,6 +55,9 @@ export const modifyPassword = data =>
 export const getUsers = params =>
   http.get(`/user/in/gxly/user/v3.0/user/info?${toQueryStr(params)}`)
 
+export const getUserDevice = params =>
+  http.get(`device/in/gxly/device/v3.0/user/device/info?${toQueryStr(params)}`)
+
 export const addUser = data => http.post(`/user/in/gxly/user/v3.0/save`, data)
 
 export const updateUser = data =>
@@ -92,9 +95,42 @@ export const updateDevice = data =>
 export const deleteDevice = data =>
   http.delete(`/device/in/gxly/device/v3.0/device/${data.id}`)
 
-// 缴费管理
+// 交费管理
 export const getPay = params =>
   http.get(`/deposit/in/gxly/deposit/v3.0/deposit/info?${toQueryStr(params)}`)
 
 export const getPayMoney = params =>
   http.get(`/deposit/in/gxly/deposit/v3.0/deposit/money?${toQueryStr(params)}`)
+
+export const updatePay = data =>
+  http.put(`/deposit/in/gxly/deposit/v3.0/deposit/reserve`, data)
+
+// 押金查询
+export const getDeposit = params =>
+  http.get(`/order/in/gxly/order/v3.0/pay/info?${toQueryStr(params)}`)
+
+export const getDepositMoney = params =>
+  http.get(`/order/in/gxly/order/v3.0/order/money?${toQueryStr(params)}`)
+
+export const updateDeposit = data =>
+  http.put(`/order/in/gxly/v3.0/order/reserve`, data)
+
+// 使用管理
+export const getUse = params =>
+  http.get(`/device/in/gxly/device/v3.0/used/info?${toQueryStr(params)}`)
+
+export const addUse = data =>
+  http.post(`/device/in/gxly/device/v3.0/lock/save`, data)
+
+export const stopTime = data =>
+  http.put(`device/in/gxly/device/v3.0/lock/stop/${data.phone}`)
+
+export const updateUse = data =>
+  http.put(`/device/in/gxly/device/v3.0/order/reserve`, data)
+
+export const deleteUse = data =>
+  http.delete(`/device/in/gxly/device/v3.0/lock/${data.id}`)
+
+//历史管理
+export const getHistory = params =>
+  http.get(`/order/in/gxly/order/v3.0/used/history/info?${toQueryStr(params)}`)
