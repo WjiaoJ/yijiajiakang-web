@@ -113,7 +113,7 @@ export const getDepositMoney = params =>
   http.get(`/order/in/gxly/order/v3.0/order/money?${toQueryStr(params)}`)
 
 export const updateDeposit = data =>
-  http.put(`/order/in/gxly/v3.0/order/reserve`, data)
+  http.put(`/order/in/gxly/order/v3.0/order/reserve`, data)
 
 // 使用管理
 export const getUse = params =>
@@ -134,3 +134,7 @@ export const deleteUse = data =>
 //历史管理
 export const getHistory = params =>
   http.get(`/order/in/gxly/order/v3.0/used/history/info?${toQueryStr(params)}`)
+
+// 设备概况
+export const getStationsDevice = id =>
+  http.get(`/device/in/gxly/device/v3.0/group/${id}`)

@@ -11,6 +11,7 @@ import PayManager from './pages/PayManager/PayManager'
 import DepositManager from './pages/DepositManager/DepositManager'
 import UseManager from './pages/UseManager/UseManager'
 import HistoryManager from './pages/HistoryManager/HistoryManager'
+import DeviceOverview from './pages/DeviceOverview/DeviceOverview'
 
 import NotFound from './pages/NotFound'
 
@@ -61,6 +62,11 @@ const router = new Router({
           path: '/history',
           name: 'HistoryManager',
           component: HistoryManager
+        },
+        {
+          path: '/device-overview',
+          name: 'DeviceOverview',
+          component: DeviceOverview
         }
       ]
     },
