@@ -32,12 +32,6 @@
 
 <template>
   <div class="app-card manager-page department-manager-page user-list" v-loading="loading">
-    <AddOrUpdateItem
-      v-if="openCardMode"
-      @close="closeDialog"
-      :mode="openCardMode"
-      :data="updateItem"
-    />
     <div class="manager-page-tool-bar">
       <div class="manager-page-tool-bar-search">
         <div class="manager-page-tool-bar-input-container">
@@ -57,7 +51,6 @@
           <el-button @click="cleanForm" icon="el-icon-close" size="small">重置</el-button>
         </div>
       </div>
-      <el-button @click="createItem" size="small" type="primary" icon="el-icon-plus">新建</el-button>
     </div>
     <div class="manager-page-table-container" ref="tableContainer">
       <el-table
@@ -111,7 +104,7 @@
                       prop="username"
                       :resizable="false"
                     ></el-table-column>
-                    <el-table-column align="center" label="设备操作" width="250px">
+                    <el-table-column align="center" label="设备操作" width="220px">
                       <template slot-scope="scope">
                         <el-link
                           @click="openLock(scope.row,2)"
@@ -149,6 +142,16 @@
             </el-table>
           </template>
         </el-table-column>
+        <el-table-column label="操作" align="center" width="200px">
+          <template slot-scope="scope">
+            <el-link
+              :disabled="!scope.row.deviceTable"
+              @click="refresh(scope.row)"
+              :underline="false"
+              icon="el-icon-refresh"
+            >刷新</el-link>
+          </template>
+        </el-table-column>
         <el-table-column label="序号" align="center" prop="order" width="80px"></el-table-column>
         <el-table-column label="场站号" prop="groupid"></el-table-column>
         <el-table-column label="场站名称" prop="groupname"></el-table-column>
@@ -173,18 +176,16 @@
 
 <script>
 import * as api from '../../common/api'
-import AddOrUpdateItem from './AddOrUpdateItem'
 import { ManagerPageMixin } from '../../common/vue-mixin'
 import store from '../../store'
 
 export default {
   mixins: [ManagerPageMixin],
-  components: {
-    AddOrUpdateItem
-  },
+
   data() {
     return {
       tableLoading: true,
+      isRefresh: false,
       form: {
         groupId: ''
       },
@@ -213,7 +214,7 @@ export default {
     async exChange(row, rowList) {
       this.tableLoading = true
 
-      if (!row.deviceTable) {
+      if (!row.deviceTable || this.isRefresh) {
         const res = (await api.getStationsDevice(row.groupid)).data
         this.tableData = this.tableData.map(item => {
           if (item.id == row.id) {
@@ -233,6 +234,14 @@ export default {
         that.expands = []
       }
       this.tableLoading = false
+    },
+    async refresh(row) {
+      this.isRefresh = true
+      const rowList = []
+      rowList.push(row)
+
+      await this.exChange(row, rowList)
+      this.isRefresh = false
     },
     openLock(row, type) {
       const operating = type == 2 ? '开锁' : type == 6 ? '重新识别' : '重启'
