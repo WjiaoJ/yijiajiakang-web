@@ -138,3 +138,6 @@ export const getHistory = params =>
 // 设备概况
 export const getStationsDevice = id =>
   http.get(`/device/in/gxly/device/v3.0/group/${id}`)
+// 设备远程开锁/重新识别/重启
+export const openLock = data =>
+  http.put(`device/in/gxly/device/v3.0/openLock`, data)
