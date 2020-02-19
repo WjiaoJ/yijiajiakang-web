@@ -79,14 +79,13 @@
                     v-loading="tableLoading"
                     :border="true"
                   >
-                    <el-table-column label="设备状态">
+                    <el-table-column align="center" label="设备状态">
                       <template slot-scope="props">
                         <div v-if="props.row.status == '1'" class="redCircle"></div>
                         <div v-else class="greenCircle"></div>
-                        {{props.row.status == '0' ? '在线': '离线' }}
+                        {{props.row.status == '1' ? '使用中': '待机中' }}
                       </template>
                     </el-table-column>
-                    <el-table-column align="center" label="id" prop="id" :resizable="false"></el-table-column>
                     <el-table-column align="center" label="设备号" prop="imei" :resizable="false"></el-table-column>
                     <el-table-column align="center" label="单元号" prop="num" :resizable="false"></el-table-column>
                     <el-table-column align="center" label="轮椅卡号" prop="cardnum" :resizable="false"></el-table-column>
@@ -129,20 +128,19 @@
                   </el-table>
                 </template>
               </el-table-column>
-              <el-table-column label="设备状态">
+              <el-table-column align="center" label="设备状态">
                 <template slot-scope="props">
-                  <div v-if="props.row.status == '1'" class="grayCircle"></div>
-                  <div v-else class="greenCircle"></div>
-                  {{props.row.status == '0' ? '在线': '离线' }}
+                  <div v-if="props.row.status == '1'" class="greenCircle"></div>
+                  <div v-else class="grayCircle"></div>
+                  {{props.row.status == '1' ? '在线': '离线' }}
                 </template>
               </el-table-column>
-              <el-table-column align="center" label="id" prop="id" :resizable="false"></el-table-column>
               <el-table-column align="center" label="设备名称" prop="devicename" :resizable="false"></el-table-column>
               <el-table-column align="center" label="电量" prop="electric" :resizable="false"></el-table-column>
             </el-table>
           </template>
         </el-table-column>
-        <el-table-column label="操作" align="center" width="200px">
+        <el-table-column label="操作" align="center" width="70px">
           <template slot-scope="scope">
             <el-link
               :disabled="!scope.row.deviceTable"
@@ -153,11 +151,11 @@
           </template>
         </el-table-column>
         <el-table-column label="序号" align="center" prop="order" width="80px"></el-table-column>
-        <el-table-column label="场站号" prop="groupid"></el-table-column>
-        <el-table-column label="场站名称" prop="groupname"></el-table-column>
-        <el-table-column label="地址" prop="grouppos"></el-table-column>
-        <el-table-column label="负责人" prop="charge_man"></el-table-column>
-        <el-table-column label="负责人手机号" prop="charge_phone"></el-table-column>
+        <el-table-column align="center" label="场站号" prop="groupid"></el-table-column>
+        <el-table-column align="center" label="场站名称" prop="groupname"></el-table-column>
+        <el-table-column align="center" label="地址" prop="grouppos"></el-table-column>
+        <el-table-column align="center" label="负责人" prop="charge_man"></el-table-column>
+        <el-table-column align="center" label="负责人手机号" prop="charge_phone"></el-table-column>
       </el-table>
     </div>
     <div class="manager-page-pagination-container">

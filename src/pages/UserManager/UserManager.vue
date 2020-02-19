@@ -60,10 +60,10 @@
           </template>
         </el-table-column>
         <el-table-column label="序号" align="center" prop="order" width="80px"></el-table-column>
-        <el-table-column label="用户名称" prop="username"></el-table-column>
-        <el-table-column label="真实姓名" prop="fullname"></el-table-column>
-        <el-table-column label="手机号" prop="phonenum"></el-table-column>
-        <el-table-column label="用户类型">
+        <el-table-column label="用户名称" align="center" prop="username"></el-table-column>
+        <el-table-column label="真实姓名" align="center" prop="fullname"></el-table-column>
+        <el-table-column label="手机号" align="center" prop="phonenum"></el-table-column>
+        <el-table-column align="center" label="用户类型">
           <template slot-scope="props">{{props.row.rolenum == '0' ? '超级管理员': '普通用户' }}</template>
         </el-table-column>
         <el-table-column label="操作" align="center" width="280px">

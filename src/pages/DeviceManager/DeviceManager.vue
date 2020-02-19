@@ -34,20 +34,20 @@
     </div>
     <div class="manager-page-table-container" ref="tableContainer">
       <el-table :height="tableHeight" :data="tableData" style="width: 100%;" highlight-current-row>
-        <el-table-column label="序号" align="center" prop="order" width="80px"></el-table-column>
+        <el-table-column align="center" label="序号" prop="order" width="80px"></el-table-column>
 
-        <el-table-column label="设备号" prop="id"></el-table-column>
-        <el-table-column label="设备名称" prop="devicename"></el-table-column>
-        <el-table-column label="设备类型">
+        <el-table-column align="center" label="设备号" prop="id"></el-table-column>
+        <el-table-column align="center" label="设备名称" prop="devicename"></el-table-column>
+        <el-table-column align="center" label="设备类型">
           <template slot-scope="props">{{props.row.type == '1' ? '轮椅': '陪护床' }}</template>
         </el-table-column>
-        <el-table-column label="场站id" prop="groupid"></el-table-column>
-        <el-table-column label="场站名称" prop="groupname"></el-table-column>
-        <el-table-column label="设备地址" prop="devicepos"></el-table-column>
-        <el-table-column label="设备状态">
+        <el-table-column align="center" label="场站id" prop="groupid"></el-table-column>
+        <el-table-column align="center" label="场站名称" prop="groupname"></el-table-column>
+        <el-table-column align="center" label="设备地址" prop="devicepos"></el-table-column>
+        <el-table-column align="center" label="设备状态">
           <template slot-scope="props">{{props.row.status == '0' ? '在线': '离线' }}</template>
         </el-table-column>
-        <el-table-column label="操作" align="center" width="200px">
+        <el-table-column align="center" label="操作" width="200px">
           <template slot-scope="scope">
             <el-link @click="editItem(scope.row)" :underline="false" icon="el-icon-edit">编辑</el-link>
             <span style="display:inline-block;width:10px"></span>

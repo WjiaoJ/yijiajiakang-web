@@ -56,18 +56,18 @@
       <el-table :height="tableHeight" :data="tableData" style="width: 100%;" highlight-current-row>
         <el-table-column label="序号" align="center" prop="order" width="50px"></el-table-column>
 
-        <el-table-column label="手机号" prop="phone"></el-table-column>
-        <el-table-column label="交易时间" prop="tradetime">
+        <el-table-column align="center" label="手机号" prop="phone"></el-table-column>
+        <el-table-column align="center" label="交易时间" prop="tradetime">
           <template slot-scope="props">
             {{
             props.row.tradetime | dateformat('YYYY-MM-DD HH:mm')
             }}
           </template>
         </el-table-column>
-        <el-table-column label="交易金额（分）" prop="fee"></el-table-column>
-        <el-table-column label="商户单号" prop="tradeid"></el-table-column>
-        <el-table-column label="微信单号" prop="wxtradeid"></el-table-column>
-        <el-table-column label="备注" prop="reserve"></el-table-column>
+        <el-table-column align="center" label="交易金额（分）" prop="fee"></el-table-column>
+        <el-table-column align="center" label="商户单号" prop="tradeid"></el-table-column>
+        <el-table-column align="center" label="微信单号" prop="wxtradeid"></el-table-column>
+        <el-table-column align="center" label="备注" prop="reserve"></el-table-column>
         <el-table-column label="操作" align="center" width="160px">
           <template slot-scope="scope">
             <el-link @click="editItem(scope.row)" :underline="false" icon="el-icon-edit">修改备注</el-link>

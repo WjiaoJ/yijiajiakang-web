@@ -116,9 +116,9 @@ export default {
       open: false,
       asideMenuConfig: [
         {
-          path: '/user',
-          name: '用户管理',
-          icon: 'el-icon-user-solid'
+          path: '/device-overview',
+          name: '设备概况',
+          icon: 'el-icon-s-data'
         },
 
         {
@@ -139,15 +139,15 @@ export default {
         },
         {
           adminOnly: true,
-          path: '/deposit',
+          path: '/use',
           name: '押金查询',
-          icon: 'el-icon-tickets'
+          icon: 'el-icon-edit-outline'
         },
         {
           adminOnly: true,
-          path: '/use',
+          path: '/deposit',
           name: '使用查询',
-          icon: 'el-icon-edit-outline'
+          icon: 'el-icon-tickets'
         },
         {
           adminOnly: true,
@@ -156,9 +156,9 @@ export default {
           icon: 'el-icon-data-analysis'
         },
         {
-          path: '/device-overview',
-          name: '设备概况',
-          icon: 'el-icon-s-data'
+          path: '/user',
+          name: '用户管理',
+          icon: 'el-icon-user-solid'
         }
       ]
     }

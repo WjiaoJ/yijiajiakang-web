@@ -80,24 +80,24 @@
     </div>
     <div class="manager-page-table-container" ref="tableContainer">
       <el-table :height="tableHeight" :data="tableData" style="width: 100%;" highlight-current-row>
-        <el-table-column label="序号" align="center" prop="order" width="50px"></el-table-column>
-        <el-table-column label="手机号" prop="phone"></el-table-column>
-        <el-table-column label="设备号" prop="imei"></el-table-column>
-        <el-table-column label="场站名称" prop="groupname"></el-table-column>
-        <el-table-column label="设备名称" prop="devname"></el-table-column>
-        <el-table-column label="设备类型">
+        <el-table-column align="center" label="序号" prop="order" width="50px"></el-table-column>
+        <el-table-column align="center" label="手机号" prop="phone"></el-table-column>
+        <el-table-column align="center" label="设备号" prop="imei"></el-table-column>
+        <el-table-column align="center" label="场站名称" prop="groupname"></el-table-column>
+        <el-table-column align="center" label="设备名称" prop="devname"></el-table-column>
+        <el-table-column align="center" label="设备类型">
           <template slot-scope="props">{{props.row.devtype == '1' ? '轮椅': '陪护床' }}</template>
         </el-table-column>
-        <el-table-column label="单元号" prop="unitnum"></el-table-column>
-        <el-table-column label="轮椅号" prop="cardnum"></el-table-column>
-        <el-table-column label="开锁时间" prop="locktime">
+        <el-table-column align="center" label="单元号" prop="unitnum"></el-table-column>
+        <el-table-column align="center" label="轮椅号" prop="cardnum"></el-table-column>
+        <el-table-column align="center" label="开锁时间" prop="locktime">
           <template slot-scope="props">
             {{
             props.row.locktime | dateformat('YYYY-MM-DD HH:mm')
             }}
           </template>
         </el-table-column>
-        <el-table-column label="备注" prop="reserve"></el-table-column>
+        <el-table-column align="center" label="备注" prop="reserve"></el-table-column>
         <el-table-column label="操作" align="center" width="180px">
           <template slot-scope="scope">
             <el-link @click="editItem(scope.row)" :underline="false" icon="el-icon-edit">修改备注</el-link>
