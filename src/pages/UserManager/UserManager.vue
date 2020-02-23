@@ -9,7 +9,13 @@
 <template>
   <div class="app-card manager-page department-manager-page user-list" v-loading="loading">
     <AddOrUpdateItem
-      v-if="openCardMode"
+      v-if="openCardMode && !openAddDevice"
+      @close="closeDialog"
+      :mode="openCardMode"
+      :data="updateItem"
+    />
+    <AddDevice
+      v-if="openCardMode && openAddDevice "
       @close="closeDialog"
       :mode="openCardMode"
       :data="updateItem"
@@ -53,8 +59,8 @@
               v-loading="tableLoading"
               :border="true"
             >
-              <el-table-column align="center" label="id" prop="id" :resizable="false"></el-table-column>
-              <el-table-column align="center" label="设备名称" prop="deviceid" :resizable="false"></el-table-column>
+              <el-table-column align="center" label="设备名称" prop="devicename" :resizable="false"></el-table-column>
+              <el-table-column align="center" label="设备号" prop="deviceid" :resizable="false"></el-table-column>
               <el-table-column align="center" label="用户名称" prop="username" :resizable="false"></el-table-column>
             </el-table>
           </template>
@@ -70,7 +76,7 @@
           <template slot-scope="scope" disabled>
             <el-link
               :disabled="scope.row.rolenum == '0'"
-              @click="editItem(scope.row)"
+              @click="editItem(scope.row),openAddDevice=false"
               :underline="false"
               icon="el-icon-edit"
             >编辑</el-link>
@@ -89,7 +95,16 @@
               icon="el-icon-delete"
             >删除</el-link>
             <span style="display:inline-block;width:10px"></span>
-            <el-link @click="viewItem(scope.row)" :underline="false" icon="el-icon-view">详情</el-link>
+            <el-link
+              @click="viewItem(scope.row),openAddDevice=false"
+              :underline="false"
+              icon="el-icon-view"
+            >详情</el-link>
+          </template>
+        </el-table-column>
+        <el-table-column label="管理设备" align="center" width="130px">
+          <template slot-scope="scope" disabled>
+            <el-link @click="addDeviceBtn(scope.row)" :underline="false" icon="el-icon-rank">管理授权设备</el-link>
           </template>
         </el-table-column>
       </el-table>
@@ -111,17 +126,20 @@
 <script>
 import * as api from '../../common/api'
 import AddOrUpdateItem from './AddOrUpdateItem'
+import AddDevice from './AddDevice'
 import { ManagerPageMixin } from '../../common/vue-mixin'
 import store from '../../store'
 
 export default {
   mixins: [ManagerPageMixin],
   components: {
-    AddOrUpdateItem
+    AddOrUpdateItem,
+    AddDevice
   },
   data() {
     return {
       tableLoading: true,
+      openAddDevice: false,
       form: {
         username: ''
       },
@@ -146,6 +164,12 @@ export default {
   methods: {
     getRowKeys: function(row) {
       return row.id
+    },
+    addDeviceBtn(row) {
+      console.log(row)
+      this.openCardMode = 'device'
+      this.updateItem = row
+      this.openAddDevice = true
     },
     async exChange(row, rowList) {
       this.tableLoading = true

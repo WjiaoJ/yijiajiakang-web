@@ -55,9 +55,6 @@ export const modifyPassword = data =>
 export const getUsers = params =>
   http.get(`/user/in/gxly/user/v3.0/user/info?${toQueryStr(params)}`)
 
-export const getUserDevice = params =>
-  http.get(`device/in/gxly/device/v3.0/user/device/info?${toQueryStr(params)}`)
-
 export const addUser = data => http.post(`/user/in/gxly/user/v3.0/save`, data)
 
 export const updateUser = data =>
@@ -65,6 +62,13 @@ export const updateUser = data =>
 
 export const deleteUser = data =>
   http.delete(`/user/in/gxly/user/v3.0/user/${data.id}`)
+
+// 管理下属设备
+export const getUserDevice = params =>
+  http.get(`/device/in/gxly/device/v3.0/user/device/info?${toQueryStr(params)}`)
+
+export const updateUserDevice = data =>
+  http.put(`/device/in/gxly/device/v3.0/user/device/update`, data)
 
 // 场站管理
 export const getStations = params =>
