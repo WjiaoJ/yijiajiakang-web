@@ -253,8 +253,7 @@ export default {
           const body = new FormData()
 
           body.append('imei', row.imei)
-          body.append('unitNum', row.num)
-          body.append('userId', JSON.parse(localStorage.userInfo).id)
+          body.append('unitnum', row.num)
           body.append('type', type)
           await api.openLock(body)
 
