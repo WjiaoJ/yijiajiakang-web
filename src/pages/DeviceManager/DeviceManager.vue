@@ -45,7 +45,7 @@
         <el-table-column align="center" label="场站名称" prop="groupname"></el-table-column>
         <el-table-column align="center" label="设备地址" prop="devicepos"></el-table-column>
         <el-table-column align="center" label="设备状态">
-          <template slot-scope="props">{{props.row.status == '0' ? '在线': '离线' }}</template>
+          <template slot-scope="props">{{props.row.status == '1' ? '在线': '离线' }}</template>
         </el-table-column>
         <el-table-column align="center" label="操作" width="200px">
           <template slot-scope="scope">

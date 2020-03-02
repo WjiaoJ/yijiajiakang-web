@@ -84,16 +84,16 @@
         <el-table-column align="center" label="手机号" prop="phone"></el-table-column>
         <el-table-column align="center" label="设备号" prop="imei"></el-table-column>
         <el-table-column align="center" label="场站名称" prop="groupname"></el-table-column>
-        <el-table-column align="center" label="设备名称" prop="devname"></el-table-column>
+        <el-table-column align="center" label="设备名称" prop="devicename"></el-table-column>
         <el-table-column align="center" label="设备类型">
           <template slot-scope="props">{{props.row.devtype == '1' ? '轮椅': '陪护床' }}</template>
         </el-table-column>
         <el-table-column align="center" label="单元号" prop="unitnum"></el-table-column>
         <el-table-column align="center" label="轮椅号" prop="cardnum"></el-table-column>
-        <el-table-column align="center" label="开锁时间" prop="locktime">
+        <el-table-column align="center" label="开锁时间" prop="unlocktime">
           <template slot-scope="props">
             {{
-            props.row.locktime | dateformat('YYYY-MM-DD HH:mm')
+            props.row.unlocktime | dateformat('YYYY-MM-DD HH:mm')
             }}
           </template>
         </el-table-column>

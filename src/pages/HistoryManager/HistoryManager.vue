@@ -157,6 +157,11 @@ export default {
       }
     }
   },
+  watch: {
+    dateRange() {
+      this.search()
+    }
+  },
   async created() {
     this.stationsNameAll = (await api.getStationsName(0)).data
   },

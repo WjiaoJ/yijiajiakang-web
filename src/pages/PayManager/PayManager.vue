@@ -123,6 +123,11 @@ export default {
       }
     }
   },
+  watch: {
+    dateRange() {
+      this.searchAll()
+    }
+  },
   created() {
     this.getTotalAmount()
   },
@@ -134,6 +139,7 @@ export default {
     genRequestParams() {
       const oneDay = 24 * 60 * 60 * 1000
       const [startTime, endTime] = this.dateRange || []
+
       return {
         ...this.form,
         page: this.pagination.page,

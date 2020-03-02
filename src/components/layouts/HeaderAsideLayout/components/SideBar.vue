@@ -134,19 +134,19 @@ export default {
         {
           adminOnly: true,
           path: '/payment',
-          name: '交费查询',
+          name: '押金查询',
           icon: 'el-icon-document'
         },
         {
           adminOnly: true,
           path: '/use',
-          name: '押金查询',
+          name: '使用查询',
           icon: 'el-icon-edit-outline'
         },
         {
           adminOnly: true,
           path: '/deposit',
-          name: '使用查询',
+          name: '交费查询',
           icon: 'el-icon-tickets'
         },
         {

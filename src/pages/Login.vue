@@ -96,7 +96,7 @@ export default {
           store.commit('setUserInfo', res.data)
           console.log(res.data)
 
-          this.$router.replace({ path: '/user' })
+          this.$router.replace({ path: '/device-overview' })
         })
         .finally(() => {
           this.loading = false

@@ -99,7 +99,7 @@
         <el-table-column align="center" label="设备类型">
           <template slot-scope="props">{{props.row.devtype == '1' ? '轮椅': '陪护床' }}</template>
         </el-table-column>
-        <el-table-column align="center" label="单元号" prop="unitnum"></el-table-column>
+        <el-table-column align="center" label="单元号" prop="unit_num"></el-table-column>
         <el-table-column align="center" label="轮椅号" prop="cardnum"></el-table-column>
         <el-table-column align="center" label="开锁时间" prop="locktime">
           <template slot-scope="props">
@@ -180,6 +180,11 @@ export default {
           )
         }
       }
+    }
+  },
+  watch: {
+    dateRange() {
+      this.searchAll()
     }
   },
   async created() {

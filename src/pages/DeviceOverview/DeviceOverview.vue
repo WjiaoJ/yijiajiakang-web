@@ -82,11 +82,11 @@
                     <el-table-column align="center" label="设备状态">
                       <template slot-scope="props">
                         <div v-if="props.row.status == '1'" class="redCircle"></div>
-                        <div v-else class="greenCircle"></div>
-                        {{props.row.status == '1' ? '使用中': '待机中' }}
+                        <div v-if="props.row.status == '0'" class="greenCircle"></div>
+                        <div v-else class="grayCircle"></div>
+                        {{props.row.status == '1' ? '使用中': props.row.status == '0' ?'待机中' :'离线' }}
                       </template>
                     </el-table-column>
-                    <el-table-column align="center" label="设备号" prop="imei" :resizable="false"></el-table-column>
                     <el-table-column align="center" label="单元号" prop="num" :resizable="false"></el-table-column>
                     <el-table-column align="center" label="轮椅卡号" prop="cardnum" :resizable="false"></el-table-column>
                     <el-table-column align="center" label="电池电量" prop="electric" :resizable="false"></el-table-column>
@@ -135,6 +135,7 @@
                   {{props.row.status == '1' ? '在线': '离线' }}
                 </template>
               </el-table-column>
+              <el-table-column align="center" label="设备号" prop="id"></el-table-column>
               <el-table-column align="center" label="设备名称" prop="devicename" :resizable="false"></el-table-column>
               <el-table-column align="center" label="电量" prop="electric" :resizable="false"></el-table-column>
             </el-table>
