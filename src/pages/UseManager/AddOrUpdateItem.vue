@@ -71,6 +71,7 @@ textarea {
 import AppDialog from '@/components/AppDialog'
 import * as api from '../../common/api'
 import * as rules from '../../common/form-rules'
+import dayjs from 'dayjs'
 
 export default {
   components: {
@@ -84,11 +85,11 @@ export default {
     return {
       loading: false,
       form: {
-        phone: '16565456456',
-        imei: '863412044089475',
-        cardnum: '123abc',
-        unitnum: '02',
-        unlocktime: '20200212141205',
+        phone: '',
+        imei: '',
+        cardnum: '',
+        unitnum: '01',
+        unlocktime: dayjs().format('YYYYMMDDHHmmss'),
         reserve: ''
       }
     }
